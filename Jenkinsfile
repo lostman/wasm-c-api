@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'make v8-checkout'
                 sh 'make v8'
             }
         }
