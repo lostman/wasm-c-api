@@ -12,6 +12,7 @@ pipeline {
                 sh 'git config --global user.name "Jenkins"'
                 sh 'make v8-checkout'
                 sh 'make v8'
+                sh 'make clean && make C_COMP=gcc LD_FLAGS= C_FLAGS="-fPIC"'
             }
         }
     }
