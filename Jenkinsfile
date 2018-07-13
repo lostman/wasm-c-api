@@ -2,7 +2,7 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile'
-            args '-v wasm-c-api-v8-cache:/code/wasm-c-api/v8
+            args '-v wasm-c-api-v8-cache:/code/wasm-c-api/v8'
         }
     }
     stages {
