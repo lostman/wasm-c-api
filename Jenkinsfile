@@ -4,7 +4,7 @@ node {
     def workspace
     stage('Build Docker Image') {
         dockerImage = docker.build("wasm-c-api-build-image")
-        def workspace = pwd()
+        workspace = pwd()
     }
     stage('Build wasm-c-api') {
         dockerImage.inside("-u root:root -v wasm-c-api-v8-cache:${workspace}/v8") {
