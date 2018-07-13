@@ -1,19 +1,16 @@
-pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            args '-u root:root -v wasm-c-api-v8-cache:/code/wasm-c-api/v8'
-        }
+node {
+    checkout scm
+    def dockerImage
+    stage('Build Docker Image') {
+        dockerImage = docker.build("Dockerfile")
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'git config --global user.email "jenkins@dfinity.org"'
-                sh 'git config --global user.name "Jenkins"'
-                sh 'make v8-checkout'
-                sh 'make v8'
-                sh 'make clean && make C_COMP=gcc LD_FLAGS= C_FLAGS="-fPIC"'
-            }
+    stage('Build wasm-c-api') {
+        dockerImage.inside('-u root:root -v hs-wasm-v8-stack-cache:/root/.stack') {
+            sh 'git config --global user.email "jenkins@dfinity.org"'
+            sh 'git config --global user.name "Jenkins"'
+            sh 'make v8-checkout'
+            sh 'make v8'
+            sh 'make clean && make C_COMP=gcc LD_FLAGS= C_FLAGS="-fPIC"'
         }
     }
 }
