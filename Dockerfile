@@ -11,3 +11,9 @@ RUN apt-get update && apt-get install -y \
     libgmp-dev \
     ninja-build \
     python
+RUN git clone https://github.com/webassembly/wabt && \
+    cd wabt && mkdir build && \
+    cd build && \
+    cmake .. -DBUILD_TESTS=OFF && \
+    make && \
+    cp wat2wasm /usr/local/bin
