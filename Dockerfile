@@ -11,10 +11,6 @@ RUN apt-get update && apt-get install -y \
     libgmp-dev \
     ninja-build \
     python
-RUN git clone https://github.com/webassembly/wabt && \
-    cd wabt && mkdir build && \
-    cd build && \
-    cmake .. -DBUILD_TESTS=OFF && \
-    make && \
-    cp wat2wasm /usr/local/bin
-ENV WASM_INTERPRETER = /usr/local/bin/wat2wasm
+RUN apt-get install -y ocaml ocamlbuild
+RUN git clone https://github.com/webassembly/spec && \
+    cd spec && make && cp wasm /usr/local/bin/
