@@ -17,3 +17,4 @@ RUN git clone https://github.com/webassembly/wabt && \
     cmake .. -DBUILD_TESTS=OFF && \
     make && \
     cp wat2wasm /usr/local/bin
+ENV WASM_INTERPRETER = /usr/local/bin/wat2wasm
