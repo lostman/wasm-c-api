@@ -8,6 +8,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'git config --global user.email "jenkins@dfinity.org"'
+                sh 'git config --global user.name "Jenkins"'
                 sh 'make v8-checkout'
                 sh 'make v8'
             }
