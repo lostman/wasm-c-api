@@ -2,7 +2,7 @@ node {
     checkout scm
     def dockerImage
     stage('Build Docker Image') {
-        dockerImage = docker.build("Dockerfile")
+        dockerImage = docker.build("wasm-c-api-build-image")
     }
     stage('Build wasm-c-api') {
         dockerImage.inside('-u root:root -v hs-wasm-v8-stack-cache:/root/.stack') {
