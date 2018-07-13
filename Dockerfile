@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install -y \
     python
 RUN apt-get install -y ocaml ocamlbuild
 RUN git clone https://github.com/webassembly/spec && \
-    cd spec && make && cp wasm /usr/local/bin/
+    cd spec/interpreter && make && cp wasm /usr/local/bin/
