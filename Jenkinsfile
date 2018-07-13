@@ -1,9 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            args '-v wasm-c-api-v8-cache:/code/wasm-c-api/v8
+        }
+    }
     stages {
         stage('Build') {
             steps {
-                sh 'make docker'
+                sh 'make v8'
             }
         }
     }
